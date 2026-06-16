@@ -154,7 +154,7 @@ Manually confirm `git ls-files` includes the required runtime code and config ab
 If the user confirms repository visibility:
 
 ```powershell
-gh repo create stefanhzh/daily-newsletter --private --description "Investor-oriented daily news newsletter pipeline" --source . --remote origin
+gh repo create stefanhzh/daily-newsletter --public --description "Investor-oriented daily news newsletter pipeline" --source . --remote origin
 ```
 
-Use `--public` only if the user explicitly confirms the repository can be public.
+Use `--public` only after the user explicitly confirms the repository can be public. Otherwise use `--private`.
