@@ -1,0 +1,45 @@
+{
+  "version": 2,
+  "selection_thresholds": {
+    "地缘政治": 58,
+    "宏观经济": 56,
+    "政策监管": 55,
+    "产业趋势": 57,
+    "科技进展": 58,
+    "资本市场与交易": 56,
+    "风险事件": 53
+  },
+  "source_overrides": {
+    "T1": {
+      "threshold_delta": -2
+    },
+    "T1_5": {
+      "threshold_delta": 0
+    },
+    "T2": {
+      "threshold_delta": 5
+    }
+  },
+  "cluster_overrides": {
+    "primary_item_delta": -2,
+    "duplicate_item_delta": 10
+  },
+  "output_limits": {
+    "target_visible_items": 24,
+    "total_items_min": 14,
+    "total_items_max": 30,
+    "category_caps": {
+      "地缘政治": 5,
+      "宏观经济": 5,
+      "政策监管": 5,
+      "产业趋势": 5,
+      "科技进展": 5,
+      "资本市场与交易": 6,
+      "风险事件": 4
+    }
+  },
+  "watchlist_rules": {
+    "always_allow_watch_section": true,
+    "watch_section_max_items": 6
+  }
+}

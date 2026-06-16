@@ -1,0 +1,4 @@
+# Optional browser-grade fulltext enrichment.
+# After installing, run Crawl4AI's browser setup command if your environment
+# requires it.
+crawl4ai>=0.8.0

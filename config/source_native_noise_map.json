@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "description": "Shared source-native noise policy. Global labels define common noise semantics; source rules map native sections, rank sections, URL patterns, and text exceptions to keep/drop/low_confidence.",
+  "global_noise_labels": {
+    "sports": {
+      "action": "drop",
+      "description": "Sports match, athlete, league, and fan-coverage items that are usually outside the investor daily-news scope."
+    },
+    "entertainment": {
+      "action": "drop",
+      "description": "Celebrity, music, film, culture, and soft entertainment items unless a source-specific keep override identifies a business angle."
+    },
+    "lifestyle": {
+      "action": "drop",
+      "description": "Lifestyle, travel, food, book, and service content with low investor relevance."
+    },
+    "photo_gallery": {
+      "action": "drop",
+      "description": "Photo gallery pages that usually duplicate or summarize events without adding a primary article."
+    },
+    "video_only": {
+      "action": "low_confidence",
+      "description": "Video-only items are retained only if another rule gives them enough relevance."
+    },
+    "native_section_missing": {
+      "action": "low_confidence",
+      "description": "The source-native section could not be extracted, so category assignment should be treated as less reliable."
+    }
+  },
+  "sources": {
+    "ap": {
+      "drop_sections": [
+        "sports",
+        "entertainment"
+      ],
+      "low_confidence_sections": [],
+      "drop_url_patterns": [
+        "/photo-gallery/"
+      ],
+      "keep_overrides": [
+        "sports betting",
+        "media rights",
+        "broadcast rights",
+        "streaming rights",
+        "sports franchise",
+        "stadium financing",
+        "gambling",
+        "antitrust",
+        "data center",
+        "artificial intelligence",
+        "ai chip",
+        "semiconductor",
+        "cyberattack"
+      ],
+      "notes": "AP homepage ranking is useful, but native sports and entertainment sections often enter the homepage Top list. Drop them unless a business, technology, policy, or market override is present."
+    },
+    "bbc": {
+      "drop_sections": [
+        "sport",
+        "sports",
+        "culture",
+        "entertainment",
+        "travel",
+        "weather"
+      ],
+      "drop_url_patterns": [
+        "/sport/",
+        "/culture/",
+        "/travel/",
+        "/weather/",
+        "/newsround/"
+      ],
+      "keep_overrides": [
+        "streaming",
+        "media rights",
+        "sports betting",
+        "brand deal",
+        "sponsorship",
+        "china",
+        "artificial intelligence",
+        "ai",
+        "technology",
+        "chip",
+        "data centre",
+        "data center",
+        "markets",
+        "inflation",
+        "tariff"
+      ],
+      "notes": "BBC adapter only enters News, Business, and Technology landing pages. This source-native noise policy is a final safety net for off-scope BBC URLs or sections; video/audio are retained by the adapter only when text summary or transcript-like text is available."
+    },
+    "tiktok-profile-signals": {
+      "drop_sections": [
+        "profile_signal",
+        "profile_videos"
+      ],
+      "drop_rank_sections": [
+        "TikTok profile: @openai",
+        "TikTok profile: @tiktok"
+      ],
+      "keep_overrides": [],
+      "notes": "Profile-level TikTok snapshots are discovery diagnostics, not stable news items. Keep them out of the main daily-news candidate pool unless a future video-level adapter adds reliable titles, timestamps, and source context."
+    },
+    "github-trending": {
+      "drop_sections": [
+        "daily"
+      ],
+      "keep_overrides": [],
+      "notes": "GitHub Trending is rendered in the standalone technical-dynamics section and should not also compete with general news clusters."
+    },
+    "github-issues-trends": {
+      "drop_sections": [
+        "issues_trends"
+      ],
+      "drop_rank_sections": [
+        "Global GitHub Issues Trends (7d)"
+      ],
+      "keep_overrides": [],
+      "notes": "GitHub issue heat is a technical signal surface. It is rendered in technical dynamics and excluded from the general news ranking pool."
+    }
+  }
+}

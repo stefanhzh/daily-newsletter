@@ -1,0 +1,39 @@
+version: 1
+
+selection_thresholds:
+  地缘政治: 66
+  宏观经济: 64
+  政策监管: 63
+  产业趋势: 65
+  科技进展: 66
+  资本市场与交易: 64
+  风险事件: 60
+
+source_overrides:
+  T1:
+    threshold_delta: -3
+  T1_5:
+    threshold_delta: 0
+  T2:
+    threshold_delta: 4
+
+cluster_overrides:
+  primary_item_delta: -2
+  duplicate_item_delta: 8
+
+output_limits:
+  top_conclusions: 3
+  total_items_min: 8
+  total_items_max: 18
+  category_caps:
+    地缘政治: 4
+    宏观经济: 4
+    政策监管: 4
+    产业趋势: 4
+    科技进展: 4
+    资本市场与交易: 5
+    风险事件: 3
+
+watchlist_rules:
+  always_allow_watch_section: true
+  watch_section_max_items: 5

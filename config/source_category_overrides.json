@@ -1,0 +1,202 @@
+{
+  "version": 1,
+  "description": "Source-specific classification metadata and score boosts. This file documents source intake semantics separately from adapter code.",
+  "source_boosts": [
+    {
+      "source_ids": ["reuters", "ap", "bbc"],
+      "keywords": ["sanction", "tariff", "gaza", "iran", "trump", "xi", "russia", "ukraine", "israel", "taiwan", "arms sales"],
+      "score_delta": {"geopolitics": 2},
+      "notes": "Tier-1 broad news/wire sources get geopolitics reinforcement when geopolitical anchor terms appear."
+    },
+    {
+      "source_ids": ["cnbc"],
+      "keywords": ["fed", "yield", "stock", "market", "ipo"],
+      "score_delta": {"capital_markets": 1, "macro": 1},
+      "notes": "CNBC market-facing headlines with these anchors should lean markets/macro."
+    },
+    {
+      "source_ids": ["cailian", "yicai"],
+      "keywords": ["证监会", "立案", "监管", "集采", "中美", "央行", "交易所"],
+      "score_delta": {"policy": 2},
+      "notes": "Chinese financial wires often express policy relevance through these regulatory anchors."
+    }
+  ],
+  "sources": {
+    "reuters": {
+      "native_section_available": true,
+      "native_section_fields": ["url_path_section"],
+      "source_tags_available": false,
+      "rank_source": "homepage_or_feed_rank",
+      "homepage_rank_is_low_confidence": false,
+      "classification_input_fields": ["title", "summary", "section"],
+      "hard_category_override": false,
+      "native_section_soft_boosts": {
+        "business": {"industry": 1, "capital_markets": 1},
+        "markets": {"capital_markets": 2},
+        "technology": {"technology": 1, "industry": 1},
+        "world": {"geopolitics": 1},
+        "politics": {"policy": 1, "geopolitics": 1}
+      },
+      "notes": "Reuters section is currently broad URL/feed metadata, not a hard category. Business gives only a light industry/markets nudge so company and transaction rules can beat the broad geopolitics fallback."
+    },
+    "axios": {
+      "native_section_available": false,
+      "rank_source": "homepage_rank_proxy",
+      "local_url_is_not_section": true,
+      "section_when_missing": "",
+      "classification_input_fields": ["title", "summary", "section"],
+      "hard_category_override": false,
+      "notes": "Axios article/homepage pages are Cloudflare-challenged in the current environment. RSS order is treated as homepage_rank_proxy and section remains empty."
+    },
+    "ap": {
+      "native_section_available": true,
+      "rank_source": "homepage_top",
+      "homepage_rank_is_low_confidence": false,
+      "classification_input_fields": ["title", "summary", "section"],
+      "hard_category_override": false,
+      "native_section_soft_boosts": {
+        "business/financial markets": {"capital_markets": 2, "industry": 1},
+        "business": {"industry": 1, "capital_markets": 1},
+        "politics": {"policy": 1, "geopolitics": 1}
+      },
+      "notes": "AP uses homepage structured ranking and article-page native section where available. Google News is enhancement only, not a hard filter."
+    },
+    "bbc": {
+      "native_section_available": true,
+      "native_section_fields": ["page.subsection", "page.section"],
+      "source_tags_available": true,
+      "source_tags_source": "article_end_topic_links",
+      "rank_source": ["news_homepage", "business_homepage", "technology_homepage"],
+      "homepage_rank_is_low_confidence": false,
+      "url_path_is_not_section": true,
+      "allowed_content_types": ["article", "video_with_text_summary", "audio_with_text_summary"],
+      "classification_input_fields": ["title", "summary", "section", "source_tags"],
+      "hard_category_override": false,
+      "native_section_soft_boosts": {
+        "business": {"industry": 2, "capital_markets": 1},
+        "technology": {"technology": 2, "industry": 1},
+        "europe": {"geopolitics": 1, "policy": 1},
+        "us and canada": {"geopolitics": 1, "policy": 1},
+        "asia": {"geopolitics": 1}
+      },
+      "notes": "BBC classification does not directly map landing page or URL path to category. Article detail section and source_tags are used as rule-matcher inputs."
+    },
+    "cnbc": {
+      "native_section_available": true,
+      "native_section_fields": ["articleSection"],
+      "source_tags_available": false,
+      "rank_source": "homepage_ranked",
+      "homepage_rank_is_low_confidence": false,
+      "classification_input_fields": ["title", "summary", "section"],
+      "hard_category_override": false,
+      "native_section_soft_boosts": {
+        "markets": {"capital_markets": 2},
+        "investing": {"capital_markets": 2},
+        "economy": {"macro": 2},
+        "politics": {"policy": 1, "geopolitics": 1},
+        "tech": {"technology": 1, "industry": 1},
+        "technology": {"technology": 1, "industry": 1},
+        "business": {"industry": 2},
+        "world": {"geopolitics": 2}
+      },
+      "notes": "CNBC homepage order is treated as rank_position/rank_section. Article page articleSection is used as the broad native section and only provides soft boosts; title and summary remain decisive."
+    },
+    "ft": {
+      "native_section_available": true,
+      "native_section_fields": ["official_rss_section"],
+      "source_tags_available": false,
+      "rank_source": "home_rss_ranked",
+      "homepage_rank_is_low_confidence": false,
+      "classification_input_fields": ["title", "summary", "section"],
+      "hard_category_override": false,
+      "native_section_soft_boosts": {
+        "companies": {"industry": 1, "capital_markets": 1},
+        "markets": {"capital_markets": 2},
+        "technology": {"technology": 1, "industry": 1},
+        "tech": {"technology": 1, "industry": 1},
+        "world": {"geopolitics": 1, "macro": 1},
+        "us": {"geopolitics": 1, "macro": 1},
+        "uk": {"geopolitics": 1, "macro": 1},
+        "politics": {"policy": 1, "geopolitics": 1}
+      },
+      "notes": "FT homepage and article pages return 403 to plain HTTP in the current environment, so the adapter uses official home RSS order as a homepage ranking proxy. Section comes from matching article URLs across official section RSS feeds and is only a soft classification signal. Opinion remains rule-matcher only."
+    },
+    "gelonghui": {
+      "native_section_available": false,
+      "source_tags_available": true,
+      "source_tags_source": "nuxt_article_detail_related_infos_and_stocks",
+      "rank_source": "hot_article_recommended",
+      "homepage_rank_is_low_confidence": false,
+      "section_when_missing": "",
+      "classification_input_fields": ["title", "summary", "source_tags"],
+      "hard_category_override": false,
+      "native_section_soft_boosts": {},
+      "native_section_context_boosts": {},
+      "notes": "Gelonghui adapter ranks the active hot-article recommendation list and stores Nuxt articleDetail relatedInfos and relatedStocks names in source_tags. No source-native section is trusted; tags are fed to the rule matcher together with title and summary. No Gelonghui-specific noise filter is added in this round."
+    },
+    "cailian": {
+      "native_section_available": false,
+      "source_tags_available": true,
+      "source_tags_source": "homepage_subjects_or_article_detail_subject",
+      "rank_source": ["hot_article", "top_article", "depth_list"],
+      "homepage_rank_is_low_confidence": false,
+      "section_when_missing": "",
+      "classification_input_fields": ["title", "summary", "source_tags"],
+      "hard_category_override": false,
+      "notes": "Cailian rank_section is a homepage module ranking source, not a semantic section. Topic subjects such as 新消费日报 or 光通信 are carried in source_tags for rule matching."
+    },
+    "caixin": {
+      "native_section_available": true,
+      "native_section_fields": ["article_entity.tagNames", "title_prefix"],
+      "source_tags_available": true,
+      "source_tags_source": "article_entity.tagNames",
+      "rank_source": ["top_stories", "most_popular", "section_page_order", "google_news_title_search_api"],
+      "homepage_rank_is_low_confidence": false,
+      "classification_input_fields": ["title", "summary", "section", "source_tags"],
+      "hard_category_override": false,
+      "native_section_soft_boosts": {
+        "finance": {"macro": 1, "capital_markets": 1, "policy": 1},
+        "business": {"industry": 2},
+        "business-and-tech": {"industry": 2},
+        "tech": {"technology": 2},
+        "technology": {"technology": 2},
+        "economy": {"macro": 2},
+        "china": {"geopolitics": 2},
+        "world": {"geopolitics": 2}
+      },
+      "notes": "Caixin Global homepage TOP STORIES and MOST POPULAR provide rank. Article entity tagNames provide native section/tag signals, but final category remains rule-matcher based. Commentary and analysis are intentionally routed by rule matcher rather than hard mapped."
+    },
+    "bloomberg": {
+      "native_section_available": true,
+      "rank_source": "official_rss_feed_order",
+      "homepage_rank_is_low_confidence": true,
+      "classification_input_fields": ["title", "summary", "section"],
+      "hard_category_override": false,
+      "native_section_soft_boosts": {
+        "markets": {"capital_markets": 2},
+        "economics": {"macro": 2},
+        "technology": {"technology": 2},
+        "industries": {"industry": 2},
+        "politics": {"geopolitics": 2},
+        "crypto": {"capital_markets": 2},
+        "wealth": {"capital_markets": 1},
+        "green": {"industry": 1}
+      },
+      "native_section_context_boosts": {
+        "technology": [
+          {
+            "bucket": "industry",
+            "delta": 3,
+            "keywords": ["global investment", "expand globally", "new entrant", "defend its turf", "market share", "competition", "rival", "rivalry", "expansion", "platform"]
+          },
+          {
+            "bucket": "capital_markets",
+            "delta": 2,
+            "keywords": ["loss", "losses", "quarterly loss", "profit", "revenue", "earnings", "outlook", "margin", "shares", "stock"]
+          }
+        ]
+      },
+      "notes": "Bloomberg section is reliable enough to use as a soft classification signal, but not a hard override. Strong geopolitical, risk, market, macro, and tech-company routing rules may still override the native section."
+    }
+  }
+}

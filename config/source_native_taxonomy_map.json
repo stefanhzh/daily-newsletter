@@ -1,0 +1,396 @@
+{
+  "version": 1,
+  "description": "Map source-native sections, rank sections, URL paths, and source defaults into the seven daily-newsletter categories. Empty or null mappings mean the label is not semantic enough and should fall back to the existing classifier.",
+  "categories": [
+    "地缘政治",
+    "宏观经济",
+    "政策监管",
+    "产业趋势",
+    "科技进展",
+    "资本市场与交易",
+    "风险事件"
+  ],
+  "global_section_map": {
+    "world": "地缘政治",
+    "world-news": "地缘政治",
+    "politics": "政策监管",
+    "whitehouse": "政策监管",
+    "business": "资本市场与交易",
+    "markets": "资本市场与交易",
+    "economics": "宏观经济",
+    "industries": "产业趋势",
+    "technology": "科技进展",
+    "tech": "科技进展",
+    "crypto": "资本市场与交易",
+    "us": "政策监管",
+    "news": null,
+    "latest": null,
+    "home": null,
+    "homepage_ranked": null,
+    "top_headlines": null,
+    "most_popular": null
+  },
+  "sources": {
+    "reuters": {
+      "default_category": null,
+      "section_map": {
+        "world": "地缘政治",
+        "business": "产业趋势",
+        "markets": "资本市场与交易"
+      },
+      "path_map": {
+        "/world/": "地缘政治",
+        "/markets/": "资本市场与交易",
+        "/business/": "产业趋势",
+        "/technology/": "科技进展",
+        "/legal/": "政策监管"
+      }
+    },
+    "ap": {
+      "default_category": null,
+      "section_map": {
+        "world": "地缘政治",
+        "world-news": "地缘政治",
+        "world news": "地缘政治",
+        "us": "地缘政治",
+        "u.s. news": "地缘政治",
+        "politics": "地缘政治",
+        "business": null,
+        "business/tariffs": "宏观经济",
+        "business/inflation": "宏观经济",
+        "business/financial markets": "资本市场与交易",
+        "business-technology": "科技进展",
+        "science": "科技进展",
+        "technology": "科技进展"
+      }
+    },
+    "bbc": {
+      "default_category": null,
+      "section_map": {
+        "news": null,
+        "business": null,
+        "technology": null,
+        "europe": null,
+        "international business": null
+      },
+      "rank_sections": {
+        "news_homepage": null,
+        "business_homepage": null,
+        "technology_homepage": null
+      },
+      "note": "BBC adapter ranks candidates from the public News, Business, and Technology landing pages. The homepage/list page is stored as rank_section only. Article page page.subsection/page.section is stored as section when available; article-end topic tags are stored as source_tags and fed into the rule matcher as classification keywords."
+    },
+    "cnbc": {
+      "default_category": "资本市场与交易",
+      "section_map": {
+        "homepage_ranked": null,
+        "markets": "资本市场与交易",
+        "investing": "资本市场与交易",
+        "economy": "宏观经济",
+        "business": "产业趋势",
+        "tech": "科技进展",
+        "technology": "科技进展",
+        "politics": "政策监管",
+        "world": "地缘政治"
+      }
+    },
+    "bloomberg": {
+      "default_category": null,
+      "section_map": {
+        "markets": "资本市场与交易",
+        "politics": "地缘政治",
+        "economics": "宏观经济",
+        "industries": "产业趋势",
+        "technology": "科技进展",
+        "crypto": "资本市场与交易"
+      }
+    },
+    "ft": {
+      "default_category": null,
+      "section_map": {
+        "world": "地缘政治",
+        "home": null,
+        "companies": "产业趋势",
+        "markets": "资本市场与交易",
+        "technology": "科技进展",
+        "tech": "科技进展",
+        "us": null,
+        "uk": null,
+        "politics": null,
+        "opinion": null
+      }
+    },
+    "wsj": {
+      "default_category": null,
+      "section_map": {
+        "world": "地缘政治",
+        "markets": "资本市场与交易",
+        "us": "政策监管",
+        "technology": "科技进展",
+        "business": "产业趋势"
+      }
+    },
+    "wall-street-journal": {
+      "alias_of": "wsj"
+    },
+    "caixin": {
+      "default_category": null,
+      "section_map": {
+        "finance": "资本市场与交易",
+        "economy": "宏观经济",
+        "companies": "产业趋势",
+        "business": "产业趋势",
+        "business-and-tech": "产业趋势",
+        "tech": "科技进展",
+        "technology": "科技进展",
+        "china": "政策监管",
+        "world": "地缘政治",
+        "commentary": null,
+        "analysis": null
+      }
+    },
+    "yicai": {
+      "default_category": null,
+      "section_map": {
+        "featured": null,
+        "latest": null
+      }
+    },
+    "cailian": {
+      "default_category": null,
+      "section_map": {
+        "hot_article": null,
+        "depth_list": null,
+        "top_article": null
+      }
+    },
+    "wallstreetcn": {
+      "default_category": "资本市场与交易",
+      "section_map": {
+        "article": null,
+        "member": null
+      }
+    },
+    "wind-news": {
+      "default_category": "资本市场与交易",
+      "section_map": {
+        "news": null
+      }
+    },
+    "ths-hotrank": {
+      "default_category": "资本市场与交易",
+      "section_map": {
+        "important_flash": null,
+        "homepage_rank": null,
+        "stock_news": "资本市场与交易",
+        "commodity_market": "资本市场与交易",
+        "headline": null,
+        "finance_news": "资本市场与交易",
+        "sector_rank": "产业趋势",
+        "flash": null
+      }
+    },
+    "36kr": {
+      "default_category": null,
+      "section_map": {
+        "feed": null
+      },
+      "path_map": {
+        "/newsflashes/": null,
+        "/p/": null
+      }
+    },
+    "gelonghui": {
+      "default_category": "资本市场与交易",
+      "section_map": {
+        "news": null
+      },
+      "rank_sections": {
+        "hot_article_recommended": null,
+        "page_body_fallback": null
+      }
+    },
+    "scmp": {
+      "default_category": null,
+      "section_map": {
+        "news": null,
+        "china": "政策监管",
+        "world": "地缘政治",
+        "business": "资本市场与交易",
+        "tech": "科技进展"
+      }
+    },
+    "nikkei-asia": {
+      "default_category": null,
+      "section_map": {
+        "business": "产业趋势",
+        "economy": "宏观经济",
+        "politics": "地缘政治",
+        "technology": "科技进展",
+        "markets": "资本市场与交易"
+      }
+    },
+    "politico": {
+      "default_category": "政策监管",
+      "section_map": {
+        "politics": "政策监管",
+        "whitehouse": "政策监管"
+      }
+    },
+    "axios": {
+      "default_category": null,
+      "section_map": {},
+      "path_map": {
+        "/local/": null
+      },
+      "note": "Homepage and article pages are Cloudflare-challenged in the current HTTP environment. The adapter uses official RSS order as homepage_rank_proxy, preserves rank_position/rank_section, and intentionally leaves section empty because no confirmed source-native section is available. Axios /local/ URL path is not treated as section."
+    },
+    "semafor": {
+      "default_category": null,
+      "section_map": {
+        "homepage_ranked": null
+      }
+    },
+    "zerohedge": {
+      "default_category": "资本市场与交易",
+      "section_map": {
+        "homepage_ranked": null,
+        "news": null
+      }
+    },
+    "techcrunch": {
+      "default_category": "科技进展",
+      "section_map": {
+        "top_headlines": null,
+        "most_popular": null,
+        "latest": null
+      }
+    },
+    "tradingview-news": {
+      "default_category": "资本市场与交易",
+      "section_map": {
+        "news": null
+      }
+    },
+    "unusual-whales": {
+      "default_category": "资本市场与交易"
+    },
+    "openai-blog": {
+      "default_category": "科技进展",
+      "section_map": {
+        "news": "科技进展",
+        "engineering": "科技进展"
+      }
+    },
+    "anthropic-news": {
+      "default_category": "科技进展"
+    },
+    "a16z-blog": {
+      "default_category": null,
+      "daily_section_news_enabled": false,
+      "note": "Knowledge-oriented source retained as an adapter, but excluded from the daily sectioned news workflow by default."
+    },
+    "y-combinator": {
+      "default_category": "科技进展"
+    },
+    "huggingface": {
+      "default_category": "科技进展",
+      "section_map": {
+        "blog": "科技进展"
+      }
+    },
+    "semianalysis": {
+      "default_category": "科技进展",
+      "section_map": {
+        "latest": null
+      }
+    },
+    "stratechery": {
+      "default_category": "科技进展"
+    },
+    "latent-space": {
+      "default_category": "科技进展",
+      "section_map": {
+        "newsletter": "科技进展"
+      }
+    },
+    "lennys-newsletter": {
+      "default_category": "产业趋势"
+    },
+    "lesswrong": {
+      "default_category": "科技进展",
+      "section_map": {
+        "posts": "科技进展"
+      }
+    },
+    "lobsters": {
+      "default_category": "科技进展",
+      "section_map": {
+        "newest": null
+      }
+    },
+    "github-trending": {
+      "default_category": "科技进展",
+      "section_map": {
+        "daily": "科技进展"
+      }
+    },
+    "github-issues-trends": {
+      "default_category": "科技进展",
+      "section_map": {
+        "issues_trends": "科技进展"
+      }
+    },
+    "google-trends": {
+      "default_category": null,
+      "section_map": {
+        "daily_trends": null
+      }
+    },
+    "reddit-hot": {
+      "default_category": null
+    },
+    "bilibili-popular": {
+      "default_category": null
+    },
+    "zhihu-hot": {
+      "default_category": null,
+      "section_map": {
+        "hot": null
+      }
+    },
+    "xiaohongshu-search": {
+      "default_category": null
+    },
+    "x-account-posts": {
+      "default_category": null,
+      "section_map": {
+        "account_posts": null
+      }
+    },
+    "tiktok-profile-signals": {
+      "default_category": null,
+      "section_map": {
+        "profile_signal": null
+      }
+    },
+    "youtube-channel-feeds": {
+      "default_category": null,
+      "section_map": {
+        "channel_uploads": null
+      }
+    },
+    "wechat-search": {
+      "default_category": null
+    },
+    "xiaoyuzhou-feeds": {
+      "default_category": null
+    },
+    "discord-blog": {
+      "default_category": "科技进展"
+    },
+    "telegram-blog": {
+      "default_category": "科技进展"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Daily Newsletter Report"
+  short_description: "Generate investor daily news reports."
+  default_prompt: "Use $daily-newsletter-report to generate the past 24 hours investor news daily with HTML and Markdown outputs."
+policy:
+  allow_implicit_invocation: true

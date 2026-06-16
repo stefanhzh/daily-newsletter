@@ -1,0 +1,115 @@
+{
+  "default": {
+    "description": "All currently registered source adapters. Used when no sources are specified.",
+    "lookback_hours": 24,
+    "sources": [
+      {"id": "reuters", "limit": 20},
+      {"id": "ap", "limit": 20},
+      {"id": "bbc", "limit": 20},
+      {"id": "cnbc", "limit": 20},
+      {"id": "bloomberg", "limit": 20},
+      {"id": "ft", "limit": 20},
+      {"id": "wall-street-journal", "limit": 20},
+      {"id": "caixin", "limit": 20},
+      {"id": "yicai", "limit": 20},
+      {"id": "cailian", "limit": 20},
+      {"id": "wallstreetcn", "limit": 20},
+      {"id": "wind-news", "limit": 20},
+      {"id": "ths-hotrank", "limit": 20},
+      {"id": "36kr", "limit": 15},
+      {"id": "gelonghui", "limit": 15},
+      {"id": "scmp", "limit": 15},
+      {"id": "nikkei-asia", "limit": 15},
+      {"id": "politico", "limit": 15},
+      {"id": "axios", "limit": 15},
+      {"id": "semafor", "limit": 15},
+      {"id": "zerohedge", "limit": 15},
+      {"id": "techcrunch", "limit": 15},
+      {"id": "tradingview-news", "limit": 15},
+      {"id": "unusual-whales", "limit": 10},
+      {"id": "openai-blog", "limit": 10},
+      {"id": "anthropic-news", "limit": 10},
+      {"id": "a16z-blog", "limit": 10},
+      {"id": "y-combinator", "limit": 10},
+      {"id": "huggingface", "limit": 10},
+      {"id": "semianalysis", "limit": 10},
+      {"id": "stratechery", "limit": 10},
+      {"id": "latent-space", "limit": 10},
+      {"id": "lennys-newsletter", "limit": 10},
+      {"id": "lesswrong", "limit": 10},
+      {"id": "lobsters", "limit": 10},
+      {"id": "github-trending", "limit": 15},
+      {"id": "github-issues-trends", "limit": 15},
+      {"id": "google-trends", "limit": 10},
+      {"id": "reddit-hot", "limit": 10},
+      {"id": "bilibili-popular", "limit": 10},
+      {"id": "zhihu-hot", "limit": 10},
+      {"id": "xiaohongshu-search", "limit": 10},
+      {"id": "x-account-posts", "limit": 10},
+      {"id": "tiktok-profile-signals", "limit": 10},
+      {"id": "youtube-channel-feeds", "limit": 10},
+      {"id": "wechat-search", "limit": 10},
+      {"id": "xiaoyuzhou-feeds", "limit": 10},
+      {"id": "discord-blog", "limit": 10},
+      {"id": "telegram-blog", "limit": 10}
+    ]
+  },
+  "investor-core": {
+    "description": "Focused investor-oriented default scan with major global and China market sources.",
+    "lookback_hours": 24,
+    "sources": [
+      {"id": "reuters", "limit": 20},
+      {"id": "ap", "limit": 20},
+      {"id": "bbc", "limit": 20},
+      {"id": "cnbc", "limit": 20},
+      {"id": "bloomberg", "limit": 20},
+      {"id": "ft", "limit": 20},
+      {"id": "wall-street-journal", "limit": 20},
+      {"id": "caixin", "limit": 20},
+      {"id": "yicai", "limit": 20},
+      {"id": "cailian", "limit": 10},
+      {"id": "techcrunch", "limit": 10},
+      {"id": "ths-hotrank", "limit": 10},
+      {"id": "google-trends", "limit": 10}
+    ]
+  },
+  "global-news": {
+    "description": "Broad global news and market-facing media scan.",
+    "lookback_hours": 24,
+    "sources": [
+      {"id": "reuters", "limit": 25},
+      {"id": "ap", "limit": 20},
+      {"id": "bbc", "limit": 20},
+      {"id": "cnbc", "limit": 20},
+      {"id": "bloomberg", "limit": 20},
+      {"id": "ft", "limit": 20},
+      {"id": "wall-street-journal", "limit": 20}
+    ]
+  },
+  "tech-ai": {
+    "description": "Technology and AI source scan.",
+    "lookback_hours": 72,
+    "sources": [
+      {"id": "openai-blog", "limit": 10},
+      {"id": "anthropic-news", "limit": 10},
+      {"id": "techcrunch", "limit": 20},
+      {"id": "huggingface", "limit": 10},
+      {"id": "a16z-blog", "limit": 10},
+      {"id": "y-combinator", "limit": 10},
+      {"id": "github-trending", "limit": 15}
+    ]
+  },
+  "china-market": {
+    "description": "China market and policy source scan.",
+    "lookback_hours": 24,
+    "sources": [
+      {"id": "caixin", "limit": 20},
+      {"id": "yicai", "limit": 20},
+      {"id": "cailian", "limit": 20},
+      {"id": "wallstreetcn", "limit": 20},
+      {"id": "wind-news", "limit": 20},
+      {"id": "ths-hotrank", "limit": 20},
+      {"id": "36kr", "limit": 10}
+    ]
+  }
+}

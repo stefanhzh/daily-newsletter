@@ -1,0 +1,58 @@
+version: 1
+
+watchlists:
+  geopolitics:
+    - sanctions
+    - export controls
+    - tariff
+    - critical minerals
+    - shipping disruption
+    - election risk
+
+  macro:
+    - rate cut
+    - rate hike
+    - CPI
+    - payrolls
+    - credit stress
+    - RMB
+
+  policy:
+    - industrial policy
+    - subsidy
+    - antitrust
+    - data security
+    - foreign investment review
+    - listing reform
+
+  industry:
+    - price war
+    - capacity expansion
+    - inventory
+    - utilization
+    - localization
+    - logistics
+
+  technology:
+    - AI model
+    - GPU
+    - semiconductor equipment
+    - battery
+    - robotics
+    - biotech
+
+  capital_markets:
+    - IPO
+    - M&A
+    - divestiture
+    - refinancing
+    - valuation
+    - capital inflow
+
+  risk:
+    - default
+    - fraud
+    - accident
+    - investigation
+    - penalty
+    - cyberattack

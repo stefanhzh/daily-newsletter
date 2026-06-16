@@ -1,0 +1,40 @@
+# Python/runtime artifacts.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Generated newsletter outputs and local scratch data.
+reports/
+artifacts/
+data/
+experiments/
+
+# Local secrets, tokens, sessions, and browser state.
+.env
+.env.*
+*.env
+*.key
+*.pem
+*.p12
+*.pfx
+*token*
+*cookie*
+*session*
+*.sqlite
+*.sqlite3
+*.db
+*.log
+request_audit.jsonl
+config/auth_states/
+*.storage_state.json
+translation_cache.json
+
+# OS/editor noise.
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

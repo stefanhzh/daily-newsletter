@@ -1,0 +1,80 @@
+{
+  "version": 2,
+  "model_dimensions": {
+    "importance": 0.32,
+    "novelty": 0.16,
+    "investor_relevance": 0.22,
+    "credibility": 0.18,
+    "breadth": 0.12
+  },
+  "dimension_aliases": {
+    "pe_relevance": "investor_relevance"
+  },
+  "base_score": {
+    "scale_per_point": 12,
+    "max_raw": 60
+  },
+  "source_adjustments": {
+    "tier_weights": {
+      "T1": 6,
+      "T1_5": 2,
+      "T2": -3
+    },
+    "group_adjustments": {
+      "official": 3,
+      "regulator": 4,
+      "exchange": 4,
+      "wire": 3,
+      "media": 0,
+      "sector_media": -1,
+      "social": -3,
+      "kol": -5
+    },
+    "role_adjustments": {
+      "verification": 2,
+      "discovery_and_verification": 1,
+      "discovery_and_context": 0,
+      "directed_monitoring": -1,
+      "discovery_only": -3,
+      "context": 0
+    }
+  },
+  "event_adjustments": {
+    "primary_item_bonus": 4,
+    "duplicate_penalty": -12,
+    "repeated_same_story_penalty": -8,
+    "official_confirmation_bonus": 4,
+    "rumor_penalty": -14
+  },
+  "recency_adjustments": {
+    "within_6h": 4,
+    "within_24h": 2,
+    "older_than_24h": -3,
+    "older_than_48h": -8
+  },
+  "category_adjustments": {
+    "地缘政治": 2,
+    "宏观经济": 2,
+    "政策监管": 2,
+    "产业趋势": 0,
+    "科技进展": 0,
+    "资本市场与交易": 1,
+    "风险事件": 3
+  },
+  "investor_focus_adjustments": {
+    "exit_environment_bonus": 4,
+    "deal_activity_bonus": 4,
+    "sector_structure_bonus": 3,
+    "policy_shock_bonus": 4,
+    "cross_asset_bonus": 3,
+    "narrow_single_company_penalty": -5,
+    "commentary_only_penalty": -6
+  },
+  "normalization": {
+    "scale_min": 0,
+    "scale_max": 100,
+    "soft_cap_start": 88,
+    "soft_cap_factor": 0.5,
+    "rounding": "nearest_integer"
+  }
+}

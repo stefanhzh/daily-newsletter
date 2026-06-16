@@ -1,0 +1,56 @@
+version: 1
+
+model_dimensions:
+  importance: 0.28
+  novelty: 0.18
+  pe_relevance: 0.24
+  credibility: 0.18
+  breadth: 0.12
+
+source_adjustments:
+  tier_weights:
+    T1: 8
+    T1_5: 3
+    T2: -2
+  group_adjustments:
+    official: 4
+    regulator: 5
+    exchange: 5
+    wire: 3
+    media: 0
+    social: -2
+    kol: -4
+
+event_adjustments:
+  primary_item_bonus: 6
+  duplicate_penalty: -10
+  repeated_same_story_penalty: -6
+  official_confirmation_bonus: 5
+  rumor_penalty: -12
+
+recency_adjustments:
+  within_6h: 5
+  within_24h: 2
+  older_than_24h: -4
+  older_than_48h: -10
+
+category_adjustments:
+  地缘政治: 2
+  宏观经济: 2
+  政策监管: 3
+  产业趋势: 0
+  科技进展: 0
+  资本市场与交易: 1
+  风险事件: 4
+
+pe_focus_adjustments:
+  exit_environment_bonus: 5
+  deal_activity_bonus: 5
+  sector_structure_bonus: 4
+  policy_shock_bonus: 4
+  narrow_single_company_penalty: -6
+
+normalization:
+  scale_min: 0
+  scale_max: 100
+  rounding: nearest_integer

@@ -1,0 +1,1199 @@
+{
+  "version": 2,
+  "briefing_defaults": {
+    "timezone": "Asia/Shanghai",
+    "default_lookback_hours": 24,
+    "background_max_hours": 72,
+    "target_visible_items": 24
+  },
+  "quality_policy": {
+    "prefer_primary_sources": true,
+    "require_cross_check_for_material_claims": true,
+    "allow_social_for_discovery_only": true,
+    "prefer_official_source_as_cluster_primary": true
+  },
+  "user_source_preferences": {
+    "core_source_ids": [
+      "bloomberg",
+      "reuters",
+      "caixin",
+      "yicai",
+      "financial-times",
+      "wall-street-journal",
+      "the-information",
+      "hkex",
+      "sse",
+      "szse"
+    ],
+    "discovery_source_ids": [
+      "wechat-cyber-zen",
+      "wechat-digital-life-khazix",
+      "wechat-zeping-macro",
+      "cnbc",
+      "ap",
+      "cailian"
+    ]
+  },
+  "tiers": {
+    "T1": {
+      "description": "Primary official or near-primary sources. Highest authority for verification and cluster primacy.",
+      "default_weight": 1.2,
+      "default_threshold_delta": -3
+    },
+    "T1_5": {
+      "description": "High-quality secondary official channels or strong market media. Useful for discovery, but noisier than T1.",
+      "default_weight": 1.05,
+      "default_threshold_delta": 0
+    },
+    "T2": {
+      "description": "Discovery-oriented media, sector press, and KOL sources. Useful for recall, but not ideal as final primary evidence.",
+      "default_weight": 0.9,
+      "default_threshold_delta": 4
+    }
+  },
+  "source_groups": {
+    "official": {
+      "preferred_for_primary_item": true,
+      "default_role": "verification"
+    },
+    "regulator": {
+      "preferred_for_primary_item": true,
+      "default_role": "verification"
+    },
+    "exchange": {
+      "preferred_for_primary_item": true,
+      "default_role": "verification"
+    },
+    "wire": {
+      "preferred_for_primary_item": true,
+      "default_role": "discovery_and_verification"
+    },
+    "media": {
+      "preferred_for_primary_item": false,
+      "default_role": "discovery_and_context"
+    },
+    "sector_media": {
+      "preferred_for_primary_item": false,
+      "default_role": "directed_monitoring"
+    },
+    "social": {
+      "preferred_for_primary_item": false,
+      "default_role": "discovery_only"
+    },
+    "kol": {
+      "preferred_for_primary_item": false,
+      "default_role": "discovery_only"
+    }
+  },
+  "regions": [
+    "global",
+    "us",
+    "europe",
+    "china",
+    "hong_kong",
+    "asia"
+  ],
+  "discovery_profiles": {
+    "global_macro_geopolitics": {
+      "description": "Default broad scan for geopolitics, macro, policy, and cross-asset developments.",
+      "preferred_groups": [
+        "wire",
+        "media",
+        "official",
+        "regulator"
+      ],
+      "source_ids": [
+        "reuters",
+        "bloomberg",
+        "financial-times",
+        "wall-street-journal",
+        "ap",
+        "fed",
+        "ecb",
+        "us-treasury",
+        "mofcom",
+        "pboc"
+      ]
+    },
+    "china_market_policy": {
+      "description": "China and Hong Kong policy, market structure, and financing environment.",
+      "preferred_groups": [
+        "regulator",
+        "exchange",
+        "media",
+        "wire"
+      ],
+      "source_ids": [
+        "caixin",
+        "yicai",
+        "cailian",
+        "csrc",
+        "ndrc",
+        "miit",
+        "samr",
+        "cac",
+        "hkex",
+        "sse",
+        "szse"
+      ]
+    },
+    "technology_ai_semiconductor": {
+      "description": "Technology and AI coverage for investors, not consumer-tech chatter.",
+      "preferred_groups": [
+        "official",
+        "wire",
+        "sector_media",
+        "media"
+      ],
+      "source_ids": [
+        "reuters",
+        "bloomberg",
+        "openai-blog",
+        "anthropic-news",
+        "google-blog",
+        "company-ir-pages",
+        "techcrunch",
+        "y-combinator",
+        "the-information"
+      ]
+    },
+    "capital_markets_transactions": {
+      "description": "IPO, refinancing, M&A, credit, and transaction-related developments.",
+      "preferred_groups": [
+        "exchange",
+        "regulator",
+        "wire",
+        "media",
+        "official"
+      ],
+      "source_ids": [
+        "reuters",
+        "bloomberg",
+        "wall-street-journal",
+        "sec-filings",
+        "hkex",
+        "csrc",
+        "company-ir-pages",
+        "caixin"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "reuters",
+      "aliases": [
+        "reuters-world"
+      ],
+      "name": "Reuters",
+      "tier": "T1",
+      "group": "wire",
+      "region": "global",
+      "fetch_method": "public_api_primary",
+      "enabled": true,
+      "role": "discovery_and_verification",
+      "priority_categories": [
+        "地缘政治",
+        "宏观经济",
+        "政策监管",
+        "产业趋势",
+        "资本市场与交易",
+        "风险事件"
+      ],
+      "notes": "Default first-pass source for broad discovery and factual verification."
+    },
+    {
+      "id": "bloomberg",
+      "aliases": [
+        "bloomberg-markets"
+      ],
+      "name": "Bloomberg",
+      "tier": "T1",
+      "group": "wire",
+      "region": "global",
+      "fetch_method": "public_api_primary",
+      "enabled": true,
+      "role": "discovery_and_context",
+      "priority_categories": [
+        "宏观经济",
+        "产业趋势",
+        "资本市场与交易",
+        "风险事件"
+      ],
+      "notes": "Strong for markets, financing, and cross-asset implications."
+    },
+    {
+      "id": "financial-times",
+      "aliases": [
+        "ft"
+      ],
+      "name": "Financial Times",
+      "tier": "T1",
+      "group": "media",
+      "region": "global",
+      "fetch_method": "rss_or_search",
+      "enabled": true,
+      "role": "context",
+      "priority_categories": [
+        "地缘政治",
+        "宏观经济",
+        "产业趋势",
+        "资本市场与交易"
+      ],
+      "notes": "Good for investor framing and policy context, but often not the first verification source."
+    },
+    {
+      "id": "huggingface",
+      "name": "Hugging Face",
+      "tier": "T2",
+      "group": "technical_platform",
+      "region": "global",
+      "fetch_method": "official_blog_rss_primary",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "科技进展",
+        "产业趋势"
+      ],
+      "notes": "Primary intake uses the public blog RSS feed. The main site also exposes a broad sitemap, while blog articles are publicly accessible for full-text extraction."
+    },
+    {
+      "id": "latent-space",
+      "name": "Latent Space",
+      "tier": "T2",
+      "group": "sector_media",
+      "region": "global",
+      "fetch_method": "substack_api_primary",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "科技进展",
+        "产业趋势",
+        "资本市场与交易"
+      ],
+      "notes": "Primary intake uses the public Substack posts API. Feed and sitemap are also available, and public posts expose full body_html suitable for extraction."
+    },
+    {
+      "id": "lennys-newsletter",
+      "name": "Lenny's Newsletter",
+      "tier": "T2",
+      "group": "sector_media",
+      "region": "global",
+      "fetch_method": "substack_api_primary",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "科技进展",
+        "产业趋势",
+        "资本市场与交易"
+      ],
+      "notes": "Primary intake uses the public Substack posts API. Feed and sitemap are also available. Public announcement-style posts expose full body_html, but many core deep-dive posts are only_paid and surface preview metadata only."
+    },
+    {
+      "id": "github-trending",
+      "name": "GitHub Trending",
+      "tier": "T2",
+      "group": "technical_platform",
+      "region": "global",
+      "fetch_method": "public_trending_html_primary",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "科技进展",
+        "产业趋势"
+      ],
+      "notes": "Trending is a ranking and discovery surface rather than a long-form article source. Primary intake uses the public daily trending HTML page."
+    },
+    {
+      "id": "github-issues-trends",
+      "name": "GitHub Issues Trends",
+      "tier": "T2",
+      "group": "technical_platform",
+      "region": "global",
+      "fetch_method": "public_search_api_primary",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "科技进展",
+        "产业趋势"
+      ],
+      "notes": "A trend and query surface rather than a traditional article source. Primary intake uses the public GitHub search/issues API to rank recent issues by comment activity."
+    },
+    {
+      "id": "google-trends",
+      "name": "Google Trends",
+      "tier": "T2",
+      "group": "media",
+      "region": "global",
+      "fetch_method": "public_trends_rss_primary",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "产业趋势",
+        "科技进展",
+        "中国市场",
+        "资本市场与交易"
+      ],
+      "notes": "A trend/discovery surface. Primary intake uses the public trending RSS feed and preserves rank_position, rank_section, and approx_traffic."
+    },
+    {
+      "id": "wall-street-journal",
+      "aliases": [
+        "wsj"
+      ],
+      "name": "Wall Street Journal",
+      "tier": "T1",
+      "group": "media",
+      "region": "us",
+      "fetch_method": "rss_or_search",
+      "enabled": true,
+      "role": "context",
+      "priority_categories": [
+        "宏观经济",
+        "产业趋势",
+        "资本市场与交易",
+        "科技进展"
+      ],
+      "notes": "Useful for transaction and corporate strategy context."
+    },
+    {
+      "id": "wallstreetcn",
+      "name": "华尔街见闻",
+      "tier": "T1_5",
+      "group": "media",
+      "region": "china",
+      "fetch_method": "public_api_primary",
+      "enabled": true,
+      "role": "discovery_and_context",
+      "priority_categories": [
+        "宏观经济",
+        "政策监管",
+        "产业趋势",
+        "资本市场与交易",
+        "科技进展",
+        "风险事件"
+      ],
+      "notes": "Primary intake uses the public information-flow API. The article/member detail API also exposes HTML content, making it suitable for both discovery and optional full-text enrichment."
+    },
+    {
+      "id": "ths-hotrank",
+      "name": "同花顺财经热榜",
+      "tier": "T2",
+      "group": "media",
+      "region": "china",
+      "fetch_method": "public_hotrank_html_primary",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "中国市场",
+        "资本市场与交易",
+        "产业趋势"
+      ],
+      "notes": "A ranking/discovery surface. Primary intake uses the current homepage hot-rank HTML and preserves rank_position for downstream use."
+    },
+    {
+      "id": "wind-news",
+      "name": "Wind资讯",
+      "tier": "T1_5",
+      "group": "media",
+      "region": "china",
+      "fetch_method": "public_ajax_primary",
+      "enabled": true,
+      "role": "discovery_and_context",
+      "priority_categories": [
+        "宏观经济",
+        "政策监管",
+        "资本市场与交易",
+        "产业趋势",
+        "科技进展",
+        "风险事件"
+      ],
+      "notes": "Primary intake uses the public Wind News AJAX list endpoint after establishing a site session. Detail content is available through a second public AJAX endpoint and can be used for full-text extraction."
+    },
+    {
+      "id": "ap",
+      "name": "Associated Press",
+      "tier": "T1",
+      "group": "wire",
+      "region": "global",
+      "fetch_method": "rss_or_search",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "地缘政治",
+        "风险事件"
+      ],
+      "notes": "Helpful for breaking geopolitical and event coverage."
+    },
+    {
+      "id": "axios",
+      "name": "Axios",
+      "tier": "T1_5",
+      "group": "media",
+      "region": "us",
+      "fetch_method": "official_rss_primary",
+      "enabled": true,
+      "role": "discovery_and_context",
+      "priority_categories": [
+        "地缘政治",
+        "政策监管",
+        "宏观经济",
+        "科技进展",
+        "资本市场与交易"
+      ],
+      "notes": "Primary intake uses the official RSS feed. Full-text capability relies on RSS content because direct article pages are challenge-blocked in the current environment."
+    },
+    {
+      "id": "cnbc",
+      "name": "CNBC",
+      "tier": "T1",
+      "group": "media",
+      "region": "us",
+      "fetch_method": "rss_or_search",
+      "enabled": true,
+      "role": "discovery_and_context",
+      "priority_categories": [
+        "宏观经济",
+        "资本市场与交易",
+        "科技进展"
+      ],
+      "notes": "Useful for fast market-facing coverage and public clips, but not the default primary evidence source."
+    },
+    {
+      "id": "fed",
+      "name": "Federal Reserve",
+      "tier": "T1",
+      "group": "official",
+      "region": "us",
+      "fetch_method": "official_site",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "宏观经济",
+        "政策监管"
+      ],
+      "notes": "Primary source for Fed policy, speeches, minutes, and balance sheet actions."
+    },
+    {
+      "id": "ecb",
+      "name": "European Central Bank",
+      "tier": "T1",
+      "group": "official",
+      "region": "europe",
+      "fetch_method": "official_site",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "宏观经济"
+      ],
+      "notes": "Primary source for eurozone monetary policy."
+    },
+    {
+      "id": "us-treasury",
+      "name": "U.S. Treasury",
+      "tier": "T1",
+      "group": "official",
+      "region": "us",
+      "fetch_method": "official_site",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "地缘政治",
+        "政策监管",
+        "资本市场与交易"
+      ],
+      "notes": "Important for sanctions, sovereign finance, and policy actions."
+    },
+    {
+      "id": "pboc",
+      "name": "PBOC",
+      "tier": "T1",
+      "group": "regulator",
+      "region": "china",
+      "fetch_method": "official_site",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "宏观经济",
+        "政策监管"
+      ],
+      "notes": "Primary source for China liquidity operations and monetary signals."
+    },
+    {
+      "id": "stats-nbs",
+      "name": "National Bureau of Statistics of China",
+      "tier": "T1",
+      "group": "official",
+      "region": "china",
+      "fetch_method": "official_site",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "宏观经济"
+      ],
+      "notes": "Primary source for China CPI, PPI, PMI-linked releases, industrial and retail data."
+    },
+    {
+      "id": "csrc",
+      "name": "CSRC",
+      "tier": "T1",
+      "group": "regulator",
+      "region": "china",
+      "fetch_method": "official_site",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "政策监管",
+        "资本市场与交易"
+      ],
+      "notes": "Primary source for listing policy, financing rules, and securities supervision."
+    },
+    {
+      "id": "mofcom",
+      "name": "MOFCOM",
+      "tier": "T1",
+      "group": "regulator",
+      "region": "china",
+      "fetch_method": "official_site",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "地缘政治",
+        "政策监管",
+        "产业趋势"
+      ],
+      "notes": "Primary for trade policy, investment review, and commerce-related measures."
+    },
+    {
+      "id": "ndrc",
+      "name": "NDRC",
+      "tier": "T1",
+      "group": "regulator",
+      "region": "china",
+      "fetch_method": "official_site",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "政策监管",
+        "产业趋势",
+        "宏观经济"
+      ],
+      "notes": "Important for industrial policy, capacity, energy, and project approvals."
+    },
+    {
+      "id": "miit",
+      "name": "MIIT",
+      "tier": "T1",
+      "group": "regulator",
+      "region": "china",
+      "fetch_method": "official_site",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "政策监管",
+        "产业趋势",
+        "科技进展"
+      ],
+      "notes": "Important for manufacturing, semiconductors, telecom, and industrial upgrades."
+    },
+    {
+      "id": "samr",
+      "name": "SAMR",
+      "tier": "T1",
+      "group": "regulator",
+      "region": "china",
+      "fetch_method": "official_site",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "政策监管",
+        "风险事件"
+      ],
+      "notes": "Important for antitrust, competition policy, recalls, and enforcement actions."
+    },
+    {
+      "id": "cac",
+      "name": "CAC",
+      "tier": "T1",
+      "group": "regulator",
+      "region": "china",
+      "fetch_method": "official_site",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "政策监管",
+        "科技进展"
+      ],
+      "notes": "Primary source for data governance and platform-related regulation."
+    },
+    {
+      "id": "hkex",
+      "name": "HKEX",
+      "tier": "T1",
+      "group": "exchange",
+      "region": "hong_kong",
+      "fetch_method": "official_site",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "资本市场与交易",
+        "政策监管"
+      ],
+      "notes": "Primary source for Hong Kong IPOs, listing filings, and market notices."
+    },
+    {
+      "id": "sse",
+      "name": "Shanghai Stock Exchange",
+      "tier": "T1",
+      "group": "exchange",
+      "region": "china",
+      "fetch_method": "official_site",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "资本市场与交易",
+        "政策监管"
+      ],
+      "notes": "Primary source for A-share market notices and listing-related developments."
+    },
+    {
+      "id": "szse",
+      "name": "Shenzhen Stock Exchange",
+      "tier": "T1",
+      "group": "exchange",
+      "region": "china",
+      "fetch_method": "official_site",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "资本市场与交易",
+        "政策监管"
+      ],
+      "notes": "Primary source for A-share market notices and listing-related developments."
+    },
+    {
+      "id": "sec-filings",
+      "name": "SEC Filings",
+      "tier": "T1",
+      "group": "official",
+      "region": "us",
+      "fetch_method": "official_site",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "资本市场与交易",
+        "风险事件"
+      ],
+      "notes": "Primary source for U.S. IPOs, secondary offerings, M&A filings, and governance events."
+    },
+    {
+      "id": "company-ir-pages",
+      "name": "Company IR Pages",
+      "tier": "T1",
+      "group": "official",
+      "region": "global",
+      "fetch_method": "filing_or_ir",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "资本市场与交易",
+        "科技进展",
+        "风险事件"
+      ],
+      "notes": "Primary source for deal announcements, strategic updates, and official corporate disclosures."
+    },
+    {
+      "id": "caixin",
+      "name": "Caixin",
+      "tier": "T1",
+      "group": "media",
+      "region": "china",
+      "fetch_method": "search_or_public_page",
+      "enabled": true,
+      "role": "discovery_and_context",
+      "priority_categories": [
+        "宏观经济",
+        "政策监管",
+        "产业趋势",
+        "资本市场与交易",
+        "风险事件"
+      ],
+      "notes": "High-value China financial journalism; strong for policy, finance, and industry readthrough."
+    },
+    {
+      "id": "yicai",
+      "name": "Yicai",
+      "tier": "T1_5",
+      "group": "media",
+      "region": "china",
+      "fetch_method": "search_or_public_page",
+      "enabled": true,
+      "role": "discovery",
+      "priority_categories": [
+        "宏观经济",
+        "政策监管",
+        "资本市场与交易"
+      ],
+      "notes": "Useful for China economic and business discovery."
+    },
+    {
+      "id": "cailian",
+      "name": "Cailian Press",
+      "tier": "T2",
+      "group": "sector_media",
+      "region": "china",
+      "fetch_method": "public_page",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "产业趋势",
+        "科技进展",
+        "资本市场与交易",
+        "风险事件"
+      ],
+      "notes": "Fast-moving China market and sector coverage. Good recall, weaker as primary evidence."
+    },
+    {
+      "id": "securities-times",
+      "name": "Securities Times",
+      "tier": "T2",
+      "group": "sector_media",
+      "region": "china",
+      "fetch_method": "public_page",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "资本市场与交易",
+        "政策监管",
+        "产业趋势"
+      ],
+      "notes": "Useful for A-share financing, policy signaling, and industry themes."
+    },
+    {
+      "id": "openai-blog",
+      "name": "OpenAI Blog",
+      "tier": "T1",
+      "group": "official",
+      "region": "global",
+      "fetch_method": "official_rss_primary",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "科技进展"
+      ],
+      "notes": "Primary intake uses the official OpenAI News RSS feed. Filter to canonical `/index/` article URLs because the feed mixes in Academy and other non-news surfaces. Sitemaps are useful for catalog validation, but not as the real-time primary inlet because many entries get fresh lastmod timestamps unrelated to first publication. Normalize feed links to the trailing-slash canonical article URL for stable full-text fetches."
+    },
+    {
+      "id": "36kr",
+      "name": "36氪",
+      "tier": "T1_5",
+      "group": "media",
+      "region": "china",
+      "fetch_method": "official_feed_primary",
+      "enabled": true,
+      "role": "discovery_and_context",
+      "priority_categories": [
+        "产业趋势",
+        "科技进展",
+        "资本市场与交易"
+      ],
+      "notes": "Primary intake uses the official RSS feed. Public article pages expose visible articleDetail content for full-text extraction. No clear member-only article structure was identified in the tested public feed sample."
+    },
+    {
+      "id": "a16z-blog",
+      "name": "a16z Blog",
+      "tier": "T2",
+      "group": "sector_media",
+      "region": "global",
+      "fetch_method": "public_news_listing_primary",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "科技进展",
+        "产业趋势",
+        "资本市场与交易"
+      ],
+      "notes": "Discovery uses the public news-content listing. Article pages expose published time, summary metadata, and public full text, though footer legal disclaimers require source-specific cleanup."
+    },
+    {
+      "id": "anthropic-news",
+      "name": "Anthropic News",
+      "tier": "T1",
+      "group": "official",
+      "region": "global",
+      "fetch_method": "public_news_listing_primary",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "科技进展"
+      ],
+      "notes": "Primary source for Anthropic releases and policy statements. Discovery uses the public /news listing; article pages are publicly accessible for full-text extraction."
+    },
+    {
+      "id": "google-blog",
+      "name": "Google Blog",
+      "tier": "T1_5",
+      "group": "official",
+      "region": "global",
+      "fetch_method": "official_site",
+      "enabled": true,
+      "role": "verification",
+      "priority_categories": [
+        "科技进展",
+        "产业趋势"
+      ],
+      "notes": "Useful for major Google AI and infrastructure updates."
+    },
+    {
+      "id": "bbc",
+      "name": "BBC",
+      "tier": "T1",
+      "group": "media",
+      "region": "global",
+      "fetch_method": "official_rss",
+      "enabled": true,
+      "role": "discovery_and_context",
+      "priority_categories": [
+        "地缘政治",
+        "宏观经济",
+        "政策监管",
+        "风险事件"
+      ],
+      "notes": "Broad global coverage with strong breaking-news utility. Best used for discovery and context, then cross-checked with higher-priority primary or financial sources when needed."
+    },
+    {
+      "id": "techcrunch",
+      "name": "TechCrunch",
+      "tier": "T2",
+      "group": "sector_media",
+      "region": "global",
+      "fetch_method": "rss_or_search",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "科技进展",
+        "资本市场与交易"
+      ],
+      "notes": "Primary intake can use the public WordPress JSON API; RSS and sitemap remain useful as fallback discovery layers."
+    },
+    {
+      "id": "y-combinator",
+      "name": "Y Combinator",
+      "tier": "T2",
+      "group": "sector_media",
+      "region": "us",
+      "fetch_method": "official_rss_primary",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "科技进展",
+        "资本市场与交易",
+        "产业趋势"
+      ],
+      "notes": "Primary intake uses the official YC Blog RSS feed, which includes title, canonical article URL, timestamps, categories, and content:encoded body HTML. The site-wide sitemap is broad and noisy, so it is useful only as a light catalog check rather than a real-time discovery inlet."
+    },
+    {
+      "id": "semafor",
+      "name": "Semafor",
+      "tier": "T2",
+      "group": "media",
+      "region": "global",
+      "fetch_method": "official_rss_primary",
+      "enabled": true,
+      "role": "discovery_and_context",
+      "priority_categories": [
+        "地缘政治",
+        "宏观经济",
+        "政策监管",
+        "科技进展",
+        "资本市场与交易"
+      ],
+      "notes": "Primary intake currently uses the official RSS feed; sitemap is a useful backup discovery layer for recent article URLs."
+    },
+    {
+      "id": "semianalysis",
+      "name": "Semianalysis",
+      "tier": "T2",
+      "group": "sector_media",
+      "region": "global",
+      "fetch_method": "substack_api_primary",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "科技进展",
+        "产业趋势",
+        "资本市场与交易"
+      ],
+      "notes": "Primary intake uses the newsletter.semianalysis.com Substack archive API, which surfaces current posts, timestamps, canonical URLs, and body_html. The legacy semianalysis.com WordPress JSON exists but appears stale relative to the active newsletter flow."
+    },
+    {
+      "id": "stratechery",
+      "name": "Stratechery",
+      "tier": "T2",
+      "group": "sector_media",
+      "region": "global",
+      "fetch_method": "public_wp_json_primary",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "科技进展",
+        "产业趋势",
+        "资本市场与交易"
+      ],
+      "notes": "Primary intake can use the public WordPress JSON API; RSS and sitemap are also available. Public metadata is stable, but article access mixes free essays, newsletters, and member-only teasers, so full-text coverage is mixed."
+    },
+    {
+      "id": "nikkei-asia",
+      "name": "Nikkei Asia",
+      "tier": "T1_5",
+      "group": "media",
+      "region": "asia",
+      "fetch_method": "official_rss_plus_embedded_state",
+      "enabled": true,
+      "role": "discovery_and_context",
+      "priority_categories": [
+        "地缘政治",
+        "宏观经济",
+        "政策监管",
+        "产业趋势",
+        "资本市场与交易"
+      ],
+      "notes": "Primary intake uses the official RSS feed, with article-page __NEXT_DATA__ used to enrich dates, summaries, and optional body extraction."
+    },
+    {
+      "id": "scmp",
+      "name": "South China Morning Post",
+      "tier": "T1_5",
+      "group": "media",
+      "region": "hong_kong",
+      "fetch_method": "official_rss_primary",
+      "enabled": true,
+      "role": "discovery_and_context",
+      "priority_categories": [
+        "地缘政治",
+        "宏观经济",
+        "政策监管",
+        "产业趋势",
+        "资本市场与交易"
+      ],
+      "notes": "Primary intake currently uses official RSS feeds; article pages remain publicly accessible for optional full-text extraction."
+    },
+    {
+      "id": "politico",
+      "name": "Politico",
+      "tier": "T1_5",
+      "group": "media",
+      "region": "us",
+      "fetch_method": "official_rss_primary",
+      "enabled": true,
+      "role": "discovery_and_context",
+      "priority_categories": [
+        "地缘政治",
+        "政策监管",
+        "宏观经济",
+        "资本市场与交易",
+        "风险事件"
+      ],
+      "notes": "Primary intake uses official RSS feeds. Full-text capability relies on content:encoded embedded in the feed because direct article pages are often challenge-blocked."
+    },
+    {
+      "id": "the-information",
+      "name": "The Information",
+      "tier": "T2",
+      "group": "sector_media",
+      "region": "us",
+      "fetch_method": "search_or_public_excerpt",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "科技进展",
+        "资本市场与交易",
+        "产业趋势"
+      ],
+      "notes": "High-signal tech reporting, but public home/feed/sitemap/search/graphql entrances currently return Cloudflare 403 in this environment. Google News can surface recent headlines, but stable original-link recovery is not yet available."
+    },
+    {
+      "id": "expert-kols",
+      "aliases": [
+        "expert-kol"
+      ],
+      "name": "Expert KOLs",
+      "tier": "T2",
+      "group": "kol",
+      "region": "global",
+      "fetch_method": "social_export_or_api",
+      "enabled": false,
+      "role": "discovery_only",
+      "priority_categories": [
+        "科技进展",
+        "产业趋势",
+        "资本市场与交易"
+      ],
+      "notes": "Disabled by default. Only use as discovery support, never as final primary evidence."
+    },
+    {
+      "id": "wechat-cyber-zen",
+      "name": "赛博禅心",
+      "tier": "T2",
+      "group": "kol",
+      "region": "china",
+      "fetch_method": "user_export_or_link",
+      "enabled": true,
+      "role": "discovery_only",
+      "priority_categories": [
+        "科技进展",
+        "产业趋势"
+      ],
+      "notes": "User-preferred WeChat discovery source. Use for idea discovery only; verify with stronger sources before selection."
+    },
+    {
+      "id": "wechat-digital-life-khazix",
+      "name": "数字生命卡兹克",
+      "tier": "T2",
+      "group": "kol",
+      "region": "china",
+      "fetch_method": "user_export_or_link",
+      "enabled": true,
+      "role": "discovery_only",
+      "priority_categories": [
+        "科技进展",
+        "产业趋势"
+      ],
+      "notes": "User-preferred WeChat discovery source. Use for discovery only."
+    },
+    {
+      "id": "wechat-zeping-macro",
+      "name": "泽平宏观",
+      "tier": "T2",
+      "group": "kol",
+      "region": "china",
+      "fetch_method": "user_export_or_link",
+      "enabled": true,
+      "role": "discovery_only",
+      "priority_categories": [
+        "宏观经济",
+        "政策监管",
+        "产业趋势"
+      ],
+      "notes": "User-preferred macro discovery source. Useful for topic framing, but verify claims with primary or stronger media sources."
+    },
+    {
+      "id": "zerohedge",
+      "name": "ZeroHedge",
+      "tier": "T2",
+      "group": "media",
+      "region": "global",
+      "fetch_method": "official_rss_primary",
+      "enabled": true,
+      "role": "discovery_and_context",
+      "priority_categories": [
+        "??????",
+        "??????",
+        "???????????",
+        "??????"
+      ],
+      "notes": "Primary intake uses the public full RSS feed. Public article pages are accessible and generally support full-text extraction."
+    },
+    {
+      "id": "unusual-whales",
+      "name": "Unusual Whales",
+      "tier": "T2",
+      "group": "sector_media",
+      "region": "us",
+      "fetch_method": "embedded_state_primary",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "???????????",
+        "??????",
+        "??????"
+      ],
+      "notes": "Primary intake uses the /news page __NEXT_DATA__ state. Article pages expose full body HTML in embedded state and support full-text extraction."
+    },
+    {
+      "id": "tradingview-news",
+      "name": "TradingView News",
+      "tier": "T2",
+      "group": "media",
+      "region": "global",
+      "fetch_method": "public_news_html_primary",
+      "enabled": true,
+      "role": "discovery_and_context",
+      "priority_categories": [
+        "??????",
+        "???????????",
+        "??????"
+      ],
+      "notes": "Primary intake uses the public TradingView news page and article-page embedded story payload. The generic /feed endpoint is primarily for ideas, not the curated news stream."
+    },
+    {
+      "id": "discord-blog",
+      "name": "Discord Blog",
+      "tier": "T2",
+      "group": "official",
+      "region": "global",
+      "fetch_method": "official_rss_primary",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "??????",
+        "??????"
+      ],
+      "notes": "Primary intake uses the official Discord Blog RSS feed. Public article pages are accessible and support full-text extraction."
+    },
+    {
+      "id": "telegram-blog",
+      "name": "Telegram Blog",
+      "tier": "T2",
+      "group": "official",
+      "region": "global",
+      "fetch_method": "public_blog_listing_primary",
+      "enabled": true,
+      "role": "directed_monitoring",
+      "priority_categories": [
+        "??????",
+        "??????"
+      ],
+      "notes": "Primary intake uses the public Telegram Blog listing page. Public article pages expose published timestamps and support full-text extraction."
+    },
+    {
+      "id": "lesswrong",
+      "name": "LessWrong",
+      "tier": "T2",
+      "group": "sector_media",
+      "role": "directed_monitoring",
+      "region": "global",
+      "type": "technology",
+      "discovery_methods": [
+        "rss"
+      ],
+      "notes": "Official feed contains rich post descriptions that can serve as lightweight fulltext input."
+    },
+    {
+      "id": "lobsters",
+      "name": "Lobsters",
+      "tier": "T2",
+      "group": "sector_media",
+      "role": "directed_monitoring",
+      "region": "global",
+      "type": "technology",
+      "discovery_methods": [
+        "rss"
+      ],
+      "notes": "Official RSS is the best lightweight discovery layer. The source itself is a discussion forum, so canonical URLs point to Lobsters discussion pages while source_url preserves the original linked article."
+    },
+    {
+      "id": "gelonghui",
+      "name": "格隆汇",
+      "tier": "T1_5",
+      "group": "media",
+      "role": "discovery_and_context",
+      "region": "china",
+      "type": "markets",
+      "discovery_methods": [
+        "public_listing_page",
+        "embedded_state"
+      ],
+      "notes": "Primary intake uses the public /news listing page and article-page embedded __NUXT__ state for timestamps, summary, and body content."
+    }
+  ]
+}
